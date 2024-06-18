@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "597985471171",
+    "project_id": "madang-f1ea7",
+    "storage_bucket": "madang-f1ea7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:597985471171:android:ba88c93a73256173531076",
+        "android_client_info": {
+          "package_name": "com.example.madang"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIIMFntBQBdY9WaRD9XWRgyVf42XHaIyo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
