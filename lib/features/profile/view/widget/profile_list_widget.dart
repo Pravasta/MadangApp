@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:madang/controller/preferences/cubit/preferences_cubit.dart';
+import 'package:madang/controller/scheduling/cubit/scheduling_cubit.dart';
 
 import '../../../../constant/app_colors.dart';
 import '../../../../constant/app_text.dart';
@@ -41,10 +44,14 @@ class ProfileListWidget extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const Icon(
-                      Icons.arrow_forward_ios,
-                      size: 10,
-                    ),
+                    data['label'] == 'Notification'
+                        ? adaptiveSchedule()
+                        : data['label'] == 'Change Theme'
+                            ? adaptiveTheme()
+                            : const Icon(
+                                Icons.arrow_forward_ios,
+                                size: 10,
+                              ),
                   ],
                 ),
               ),
@@ -53,6 +60,41 @@ class ProfileListWidget extends StatelessWidget {
         ),
         const SizedBox(width: 10),
       ],
+    );
+  }
+
+  Widget adaptiveTheme() {
+    return BlocBuilder<PreferencesCubit, PreferencesState>(
+      builder: (context, state) {
+        return Switch.adaptive(
+          value: state.themeState,
+          activeColor: AppColors.primaryMain,
+          activeTrackColor: AppColors.secondary90,
+          inactiveTrackColor: AppColors.secondary10,
+          inactiveThumbColor: AppColors.black,
+          onChanged: (value) async {
+            context.read<PreferencesCubit>().enabledDarkTheme(value);
+          },
+        );
+      },
+    );
+  }
+
+  Widget adaptiveSchedule() {
+    return BlocBuilder<PreferencesCubit, PreferencesState>(
+      builder: (context, state) {
+        return Switch.adaptive(
+          value: state.dailyState,
+          activeColor: AppColors.primaryMain,
+          activeTrackColor: AppColors.secondary90,
+          inactiveTrackColor: AppColors.secondary10,
+          inactiveThumbColor: AppColors.black,
+          onChanged: (value) async {
+            context.read<SchedulingCubit>().scheduledResto(value);
+            context.read<PreferencesCubit>().enabledDailyResto(value);
+          },
+        );
+      },
     );
   }
 }

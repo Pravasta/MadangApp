@@ -6,7 +6,6 @@ import 'package:madang/features/auth/view/widgets/button_field.dart';
 import 'package:madang/features/auth/view/widgets/button_submit.dart';
 
 import '../../../common/routes/routes_name.dart';
-import '../../../constant/app_colors.dart';
 import '../../../constant/app_text.dart';
 
 class LoginPage extends StatefulWidget {
@@ -31,9 +30,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
       appBar: AppBar(
-        backgroundColor: AppColors.white,
         title: Text('Login',
             style: AppText.text18.copyWith(fontWeight: FontWeight.bold)),
       ),

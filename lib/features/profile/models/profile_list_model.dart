@@ -19,6 +19,10 @@ class ProfileListModel {
       'label': 'Language',
     },
     {
+      'icon': Icons.brightness_2_rounded,
+      'label': 'Change Theme',
+    },
+    {
       'icon': Icons.notifications,
       'label': 'Notification',
     },

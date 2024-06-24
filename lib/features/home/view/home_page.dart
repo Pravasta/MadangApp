@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:madang/constant/app_colors.dart';
 import 'package:madang/features/auth/bloc/user/user_bloc.dart';
 import 'package:madang/features/home/view/section/menu_section.dart';
 import 'section/app_bar_section.dart';
@@ -24,7 +23,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
       appBar: appbar(),
       body: const SingleChildScrollView(
         child: Padding(

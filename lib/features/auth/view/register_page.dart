@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:madang/common/routes/routes_name.dart';
-import 'package:madang/constant/app_colors.dart';
 import 'package:madang/constant/app_text.dart';
 import 'package:madang/constant/state.dart';
 import 'package:madang/features/auth/bloc/credential/credential_bloc.dart';
@@ -33,9 +32,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
       appBar: AppBar(
-          backgroundColor: AppColors.white,
           title: Text('Register',
               style: AppText.text18.copyWith(fontWeight: FontWeight.bold))),
       body: content(),

@@ -14,7 +14,6 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
       appBar: HeaderProfile.appbar(context),
       body: SingleChildScrollView(
         child: Padding(

@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
-
+import 'package:madang/constant/app_url.dart';
 import '../../constant/app_colors.dart';
 import '../../constant/app_text.dart';
-import '../../constant/url_assets.dart';
 
 class GlobalRestoWidget extends StatelessWidget {
-  const GlobalRestoWidget({super.key, required this.data});
+  const GlobalRestoWidget({
+    super.key,
+    required this.imageUrl,
+    required this.name,
+    required this.city,
+    required this.rating,
+    this.isFavorite = false,
+    this.onTap,
+  });
 
-  final Map<String, dynamic> data;
+  final String imageUrl;
+  final String name;
+  final String city;
+  final double rating;
+  final bool isFavorite;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +46,8 @@ class GlobalRestoWidget extends StatelessWidget {
                     topLeft: Radius.circular(12),
                     topRight: Radius.circular(12),
                   ),
-                  child: Image.asset(
-                    UrlAssets.resto,
+                  child: Image.network(
+                    '${AppUrl.restoImage}/$imageUrl',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -43,39 +55,30 @@ class GlobalRestoWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(data['title'],
-                              style: AppText.text18
+                          Text(name,
+                              style: AppText.text16
                                   .copyWith(fontWeight: FontWeight.bold)),
-                          Text(data['city'],
+                          Text(city,
                               style: AppText.text14.copyWith(
                                   fontWeight: FontWeight.w700,
                                   color: AppColors.grey)),
                         ],
                       ),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    Row(
                       children: [
-                        Row(
-                          children: [
-                            for (int i = 0; i < 5; i++)
-                              const Icon(
-                                Icons.star,
-                                color: Colors.orange,
-                              ),
-                          ],
-                        ),
-                        Text(
-                          ' Rp. ${data['price']}',
-                          style: AppText.text16.copyWith(
-                            fontWeight: FontWeight.w700,
+                        for (int i = 0; i < rating; i++)
+                          const Icon(
+                            Icons.star,
+                            color: Colors.orange,
+                            size: 20,
                           ),
-                        ),
                       ],
                     ),
                   ],
@@ -83,19 +86,23 @@ class GlobalRestoWidget extends StatelessWidget {
               ),
             ],
           ),
-          const Positioned(
-            top: 4,
-            right: 4,
-            child: CircleAvatar(
-              backgroundColor: AppColors.secondary10,
-              radius: 20,
-              child: Icon(
-                Icons.favorite,
-                size: 25,
-                color: Colors.red,
-              ),
-            ),
-          ),
+          isFavorite
+              ? Positioned(
+                  top: 4,
+                  right: 4,
+                  child: CircleAvatar(
+                      backgroundColor: AppColors.secondary10,
+                      radius: 20,
+                      child: IconButton(
+                        onPressed: onTap,
+                        icon: const Icon(
+                          Icons.delete,
+                          size: 25,
+                          color: Colors.red,
+                        ),
+                      )),
+                )
+              : const SizedBox(),
         ],
       ),
     );

@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:madang/constant/app_colors.dart';
-import 'package:madang/constant/url_assets.dart';
-import 'package:madang/features/home/models/restaurant_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:madang/constant/state.dart';
+import 'package:madang/features/favorite/bloc/favorite_bloc.dart';
+import 'package:madang/features/favorite/view/widget/favorite_done_widget.dart';
+import 'package:madang/features/favorite/view/widget/initial_widget.dart';
 import '../../../constant/app_text.dart';
-import '../../../widgets/resto/global_resto_widget.dart';
 
-class FavoritePage extends StatelessWidget {
+class FavoritePage extends StatefulWidget {
   const FavoritePage({super.key});
+
+  @override
+  State<FavoritePage> createState() => _FavoritePageState();
+}
+
+class _FavoritePageState extends State<FavoritePage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<FavoriteBloc>().add(OnGetAllFavorite());
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: AppColors.white,
-        surfaceTintColor: AppColors.white,
         title: Text(
           'Favorite',
           style: AppText.text20.copyWith(
@@ -22,46 +32,29 @@ class FavoritePage extends StatelessWidget {
           ),
         ),
       ),
-      body: done(),
+      body: content(),
     );
   }
 
-  Widget done() {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          children: RestaurantModel.restoModel.map((e) {
-            return GlobalRestoWidget(data: e);
-          }).toList(),
-        ),
-      ),
-    );
-  }
+  Widget content() {
+    return BlocBuilder<FavoriteBloc, FavoriteState>(
+      builder: (context, state) {
+        final data = state.data;
 
-  Widget initial() {
-    return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              UrlAssets.restaurant,
-              scale: 4,
-            ),
-            const SizedBox(height: 20),
-            Text(
-              'Not have favorite item, Please add for see Favorite',
-              textAlign: TextAlign.center,
-              style: AppText.text18.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const SizedBox(height: 100),
-          ],
-        ),
-      ),
+        if (state.status == FavoriteStatusState.loading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (state.status == FavoriteStatusState.noData) {
+          return Center(child: Text(state.message));
+        }
+        if (state.status == FavoriteStatusState.error) {
+          return Center(child: Text(state.message));
+        }
+        if (state.status == FavoriteStatusState.hasData) {
+          return FavoriteDoneWidget(data: data);
+        }
+        return const FavoriteInitialWidget();
+      },
     );
   }
 }

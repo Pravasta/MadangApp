@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:madang/features/auth/view/login_page.dart';
 import 'package:madang/features/auth/view/register_page.dart';
 import 'package:madang/features/detail_page/view/detail_page.dart';
+import 'package:madang/features/home/models/restaurant_api.dart';
 import 'package:madang/features/main_navigation/view/main_navigation_page.dart';
 import 'package:madang/features/onboarding/view/onboarding_page.dart';
 import 'package:madang/features/splashscreen/view/splash_page.dart';
@@ -56,8 +57,10 @@ class RoutesHandler {
           settings: settings,
         );
       case RoutesName.detailPage:
+        final data = settings.arguments;
+        if (data == null || data is! Restaurants) return _emptyPage;
         return MaterialPageRoute(
-          builder: (context) => const DetailPage(),
+          builder: (context) => DetailPage(restaurants: data),
           settings: settings,
         );
       default:

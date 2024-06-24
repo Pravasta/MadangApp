@@ -8,9 +8,7 @@ import '../../../../constant/app_text.dart';
 
 AppBar appbar() {
   return AppBar(
-    backgroundColor: AppColors.white,
     automaticallyImplyLeading: false,
-    surfaceTintColor: AppColors.white,
     elevation: 3,
     title: BlocBuilder<UserBloc, UserState>(
       builder: (context, state) {

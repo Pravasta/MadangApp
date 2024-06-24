@@ -16,8 +16,6 @@ class HeaderProfile {
         children: [
           AppBar(
             automaticallyImplyLeading: false,
-            surfaceTintColor: AppColors.white,
-            backgroundColor: AppColors.white,
             title: Text(
               'Profile',
               style: AppText.text20.copyWith(

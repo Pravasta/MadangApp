@@ -40,6 +40,12 @@ dependencies:
   firebase_auth: ^5.1.0
   cloud_firestore: ^5.0.1
   shared_preferences: ^2.2.3
+  http: ^1.2.1
+  sqflite: ^2.3.3+1
+  intl: ^0.19.0
+  android_alarm_manager_plus: ^4.0.3
+  rxdart: ^0.28.0
+  flutter_local_notifications: ^17.1.2
 
 dev_dependencies:
   flutter_test:
