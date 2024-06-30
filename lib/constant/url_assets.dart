@@ -1,6 +1,7 @@
 class UrlAssets {
   static const String _baseAssetUrl = 'assets';
 
+  // Icon
   static const bag = '$_baseAssetUrl/icon/bag.png';
   static const poster = '$_baseAssetUrl/icon/poster.png';
   static const poster1 = '$_baseAssetUrl/icon/poster1.png';
@@ -14,4 +15,7 @@ class UrlAssets {
   static const googleLogo = '$_baseAssetUrl/icon/google_logo.png';
   static const profile = '$_baseAssetUrl/icon/profile.png';
   static const menu = '$_baseAssetUrl/icon/menu.png';
+
+  // Lottie
+  static const loading = '$_baseAssetUrl/lottie/loading.json';
 }

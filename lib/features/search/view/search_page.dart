@@ -23,7 +23,6 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void dispose() {
     super.dispose();
-    searchC.dispose();
   }
 
   void clear() {
@@ -55,7 +54,10 @@ class _SearchPageState extends State<SearchPage> {
       body: BlocBuilder<SearchBloc, SearchState>(
         builder: (context, state) {
           final data = state.data;
-
+          if (state.status == SearchStatusState.initial ||
+              searchC.text.isEmpty) {
+            return initial();
+          }
           if (state.status == SearchStatusState.loading) {
             return const LoadingWidget();
           }
@@ -68,7 +70,7 @@ class _SearchPageState extends State<SearchPage> {
           if (state.status == SearchStatusState.hasData) {
             return done(context, data);
           }
-          return initial();
+          return const SizedBox();
         },
       ),
     );

@@ -19,3 +19,5 @@ class OnRegisterEvent extends CredentialEvent {
   OnRegisterEvent(
       {required this.username, required this.email, required this.password});
 }
+
+class OnGoogleSignIn extends CredentialEvent {}

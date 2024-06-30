@@ -11,65 +11,62 @@ class RestoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-              width: 1,
-              color: AppColors.grey,
-            )),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.all(5),
+      margin: const EdgeInsets.only(bottom: 10),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(
+            color: AppColors.grey,
+          )),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: Image.network(
+              '${AppUrl.restoImage}/${data.pictureId}',
+              width: MediaQuery.of(context).size.width * 2 / 8,
+              height: MediaQuery.of(context).size.width * 2 / 8,
+              fit: BoxFit.cover,
+            ),
+          ),
+          const SizedBox(width: 15),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  data.name,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: AppText.text16.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                child: Image.network('${AppUrl.restoImage}/${data.pictureId}',
-                    width: MediaQuery.of(context).size.width * 2 / 5 + 3,
-                    fit: BoxFit.cover,
-                    height: MediaQuery.of(context).size.height * 2 / 9)),
-            Padding(
-                padding: const EdgeInsets.all(5),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        data.name,
-                        style: AppText.text14.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 1),
-                      Text(data.city,
-                          style: AppText.text12.copyWith(
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.grey))
-                    ]))
-          ],
-        ),
+                const SizedBox(height: 1),
+                Text(data.city,
+                    style: AppText.text14.copyWith(
+                        fontWeight: FontWeight.w700, color: AppColors.grey))
+              ],
+            ),
+          ),
+          Column(
+            children: [
+              const Icon(Icons.star, color: Colors.orange),
+              Text(
+                '${data.rating}',
+                style: AppText.text16.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(width: 15)
+        ],
       ),
-      Positioned(
-          top: 0,
-          right: 0,
-          child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
-              decoration: const BoxDecoration(
-                  color: AppColors.black,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                  )),
-              child: Row(
-                children: [
-                  const Icon(Icons.star, color: Colors.orange, size: 16),
-                  const SizedBox(width: 3),
-                  Text('${data.rating}',
-                      style: AppText.text12.copyWith(color: AppColors.white))
-                ],
-              )))
-    ]);
+    );
   }
 }

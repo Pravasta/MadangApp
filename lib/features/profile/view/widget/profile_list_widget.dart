@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:madang/controller/preferences/cubit/preferences_cubit.dart';
-import 'package:madang/controller/scheduling/cubit/scheduling_cubit.dart';
+import 'package:madang/controller/preferences/preferences_cubit.dart';
+import 'package:madang/controller/scheduling/scheduling_cubit.dart';
 
 import '../../../../constant/app_colors.dart';
 import '../../../../constant/app_text.dart';

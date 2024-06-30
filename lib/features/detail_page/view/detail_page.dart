@@ -5,15 +5,15 @@ import 'package:madang/constant/state.dart';
 import 'package:madang/features/detail_page/bloc/detail_resto_bloc.dart';
 import 'package:madang/features/detail_page/view/section/appbar_section.dart';
 import 'package:madang/features/detail_page/view/section/menu_detail_section.dart';
-import 'package:madang/features/home/models/restaurant_api.dart';
+import 'package:madang/widgets/loading/loading_widget.dart';
 import '../models/detail_resto_model.dart';
 import 'section/content_detail_section.dart';
 import 'section/image_section.dart';
 import 'section/review_section.dart';
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({super.key, required this.restaurants});
-  final Restaurants restaurants;
+  const DetailPage({super.key, required this.id});
+  final String id;
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -23,9 +23,7 @@ class _DetailPageState extends State<DetailPage> {
   @override
   void initState() {
     super.initState();
-    context
-        .read<DetailRestoBloc>()
-        .add(OnGetDetailRestoEvent(id: widget.restaurants.id));
+    context.read<DetailRestoBloc>().add(OnGetDetailRestoEvent(id: widget.id));
   }
 
   @override
@@ -35,7 +33,7 @@ class _DetailPageState extends State<DetailPage> {
         builder: (context, state) {
           final data = state.data;
           if (state.status == DetailStatusState.loading) {
-            return const Center(child: CircularProgressIndicator());
+            return const LoadingWidget();
           }
           if (state.status == DetailStatusState.error) {
             return Center(child: Text(state.message));

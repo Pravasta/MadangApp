@@ -20,6 +20,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     Emitter<SearchState> emit,
   ) async {
     emit(state.copyWith(status: SearchStatusState.loading));
+    await Future.delayed(const Duration(milliseconds: 1000));
     try {
       final data = await _repository.getAllSearchResto(event.query);
       if (data!.isEmpty) {

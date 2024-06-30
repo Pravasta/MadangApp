@@ -23,18 +23,20 @@ class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
     Emitter<FavoriteState> emit,
   ) async {
     emit(state.copyWith(status: FavoriteStatusState.loading));
+    await Future.delayed(const Duration(seconds: 2));
     try {
       final data = await _repository.getListRestoDb();
       if (data.isEmpty) {
         emit(state.copyWith(
-          status: FavoriteStatusState.noData,
-          message: 'No Data',
+          status: FavoriteStatusState.initial,
+          message: 'Data masih kosong',
+        ));
+      } else if (data.isNotEmpty) {
+        emit(state.copyWith(
+          status: FavoriteStatusState.hasData,
+          data: data,
         ));
       }
-      emit(state.copyWith(
-        status: FavoriteStatusState.hasData,
-        data: data,
-      ));
     } catch (e) {
       emit(state.copyWith(
         status: FavoriteStatusState.error,

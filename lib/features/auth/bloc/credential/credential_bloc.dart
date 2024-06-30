@@ -14,6 +14,22 @@ class CredentialBloc extends Bloc<CredentialEvent, CredentialState> {
     on<CredentialEvent>((event, emit) {});
     on<OnLoginEvent>(onLoginMethod);
     on<OnRegisterEvent>(onRegisterMethod);
+    on<OnGoogleSignIn>((event, emit) async {
+      emit(state.copyWith(status: GlobalStateStatus.loading));
+      try {
+        final data = await _authRepo.googleSignIn();
+        emit(state.copyWith(
+          status: GlobalStateStatus.succes,
+          data: data,
+          message: 'Success',
+        ));
+      } catch (e) {
+        emit(state.copyWith(
+          status: GlobalStateStatus.error,
+          message: state.message,
+        ));
+      }
+    });
   }
 
   void onLoginMethod(

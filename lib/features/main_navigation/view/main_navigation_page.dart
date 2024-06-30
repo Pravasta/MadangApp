@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:madang/common/routes/routes_name.dart';
 import 'package:madang/constant/app_colors.dart';
 import 'package:madang/constant/app_text.dart';
-import 'package:madang/controller/preferences/cubit/preferences_cubit.dart';
+import 'package:madang/controller/preferences/preferences_cubit.dart';
 import 'package:madang/features/main_navigation/models/main_navigation_model.dart';
 import 'package:madang/utils/schedulling/notification_helper.dart';
 

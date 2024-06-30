@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:madang/features/auth/models/user_model.dart';
 
 class FirebaseAuthService {
@@ -143,6 +144,38 @@ class FirebaseAuthService {
         'photoUrl': user.photoUrl,
         'phoneNumber': user.phoneNumber,
       });
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  Future<UserModel> signInWithGoogle() async {
+    final GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
+    try {
+      await googleSignIn.disconnect();
+    } catch (_) {}
+
+    try {
+      GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+      GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      final user = await _auth.signInWithCredential(credential);
+      final userModel = UserModel(
+        uid: user.user!.uid,
+        username: user.user!.displayName,
+        email: user.user!.email,
+        photoUrl: user.user!.photoURL,
+        phoneNumber: user.user!.phoneNumber,
+        isVerified: user.user!.emailVerified,
+      );
+
+      await setUser(userModel);
+
+      return userModel;
     } catch (e) {
       throw e.toString();
     }

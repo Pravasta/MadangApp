@@ -22,6 +22,7 @@ class DetailRestoBloc extends Bloc<DetailRestoEvent, DetailRestoState> {
     Emitter<DetailRestoState> emit,
   ) async {
     emit(state.copyWith(status: DetailStatusState.loading));
+    await Future.delayed(const Duration(milliseconds: 1500));
     try {
       final data = await _repository.getDetailResto(event.id);
       emit(state.copyWith(

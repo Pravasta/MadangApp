@@ -10,13 +10,16 @@ import 'package:madang/features/search/models/search_restaurant_response.dart';
 
 class RestaurantApiService {
   final AppEndPoint _appEndPoint;
+  final http.Client _client;
 
   RestaurantApiService({
     required AppEndPoint appEndPoint,
-  }) : _appEndPoint = appEndPoint;
+    required http.Client client,
+  })  : _appEndPoint = appEndPoint,
+        _client = client;
 
   Future<RestaurantResponse> getAllResto() async {
-    final response = await http.get(_appEndPoint.getListRestaurant());
+    final response = await _client.get(_appEndPoint.getListRestaurant());
     try {
       if (response.statusCode == 200) {
         final data = restaurantResponseFromJson(response.body);
@@ -32,7 +35,7 @@ class RestaurantApiService {
   }
 
   Future<Restaurants> getRandomResto() async {
-    final response = await http.get(_appEndPoint.getListRestaurant());
+    final response = await _client.get(_appEndPoint.getListRestaurant());
     try {
       if (response.statusCode == 200) {
         final random = Random();
@@ -53,7 +56,7 @@ class RestaurantApiService {
   }
 
   Future<DetailRestaurantResponse> getDetailResto(String id) async {
-    final response = await http.get(_appEndPoint.getDetailRestaurant(id));
+    final response = await _client.get(_appEndPoint.getDetailRestaurant(id));
 
     try {
       if (response.statusCode == 200) {
@@ -70,7 +73,7 @@ class RestaurantApiService {
   }
 
   Future<SearchRestaurantResponse> getSearchResto(String query) async {
-    final response = await http.get(_appEndPoint.getSearchRestaurant(query));
+    final response = await _client.get(_appEndPoint.getSearchRestaurant(query));
 
     try {
       if (response.statusCode == 200) {
@@ -88,7 +91,7 @@ class RestaurantApiService {
 
   Future<void> addReview(String id, String name, String review) async {
     try {
-      final response = await http.post(
+      final response = await _client.post(
         _appEndPoint.postAddReview(),
         headers: {
           'Content-Type': 'application/json',

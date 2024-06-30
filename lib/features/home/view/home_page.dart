@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:madang/features/auth/bloc/user/user_bloc.dart';
-import 'package:madang/features/home/view/section/menu_section.dart';
 import 'section/app_bar_section.dart';
-import 'section/poster_section.dart';
 import 'section/restaurant_section.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,17 +22,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appbar(),
-      body: const SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20),
-          child: Column(
-            children: [
-              PosterSection(),
-              MenuSection(),
-              RestaurantSection(),
-            ],
-          ),
-        ),
+      body: const Padding(
+        padding: EdgeInsets.all(15),
+        child: RestaurantSection(),
       ),
     );
   }

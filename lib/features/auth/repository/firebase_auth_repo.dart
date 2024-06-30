@@ -7,6 +7,7 @@ abstract class FirebaseAuthRepo {
   Future<void> forgotPassword(String email);
   Future<bool> signOut();
   Future<UserModel> getUser();
+  Future<UserModel> googleSignIn();
   Future<String?> getCurrentUserId();
   Future<bool> isSignIn();
 }
@@ -32,6 +33,12 @@ class FirebaseAuthRepoImpl implements FirebaseAuthRepo {
   @override
   Future<UserModel> getUser() async {
     final call = await _authService.getUser();
+    return call;
+  }
+
+  @override
+  Future<UserModel> googleSignIn() async {
+    final call = await _authService.signInWithGoogle();
     return call;
   }
 

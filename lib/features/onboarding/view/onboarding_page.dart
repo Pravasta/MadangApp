@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:madang/common/routes/routes_name.dart';
 import 'package:madang/constant/app_colors.dart';
 import 'package:madang/constant/app_text.dart';
-import 'package:madang/constant/url_assets.dart';
+import 'package:madang/features/onboarding/view/widgets/sign_in_google_widget.dart';
 import 'package:madang/widgets/button/default_button.dart';
 
 class OnboardingPage extends StatelessWidget {
@@ -57,14 +57,7 @@ class OnboardingPage extends StatelessWidget {
                   color: AppColors.primaryMain,
                 ),
                 const SizedBox(height: 10),
-                DefaultButton(
-                  title: 'Login',
-                  iconUrl: UrlAssets.googleLogo,
-                  elevation: 0,
-                  onTap: () {},
-                  backgroundColor: AppColors.white,
-                  color: AppColors.primaryMain,
-                )
+                const SignInGoogleWidget(),
               ],
             ),
             const SizedBox(),

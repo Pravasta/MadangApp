@@ -6,7 +6,6 @@ import '../widgets/dialog_widget.dart';
 
 class ReviewSection extends StatefulWidget {
   const ReviewSection({super.key, this.data});
-
   final Restaurant? data;
 
   @override

@@ -52,7 +52,7 @@ class NotificationHelper {
     Restaurants restaurant,
   ) async {
     var channelId = '1';
-    var channelName = 'Madang_01';
+    var channelName = 'Madang';
     var channelDescription = 'Madang recommended resto';
 
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
@@ -95,7 +95,7 @@ class NotificationHelper {
 
         Navigator.of(context).pushNamed(
           RoutesName.detailPage,
-          arguments: data,
+          arguments: data.id,
         );
       },
     );

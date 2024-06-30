@@ -4,6 +4,7 @@ import 'package:madang/common/endpoint/app_endpoint.dart';
 import 'package:madang/service/api/restaurant_api_service.dart';
 import 'package:madang/utils/schedulling/notification_helper.dart';
 import 'package:madang/main.dart';
+import 'package:http/http.dart' as http;
 
 final ReceivePort port = ReceivePort();
 
@@ -29,6 +30,7 @@ class BackgroundService {
     print('Alarm fired!');
     final NotificationHelper notificationHelper = NotificationHelper();
     var result = await RestaurantApiService(
+      client: http.Client(),
       appEndPoint: AppEndPoint('restaurant-api.dicoding.dev'),
     ).getRandomResto();
 

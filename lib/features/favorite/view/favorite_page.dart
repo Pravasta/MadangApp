@@ -4,6 +4,7 @@ import 'package:madang/constant/state.dart';
 import 'package:madang/features/favorite/bloc/favorite_bloc.dart';
 import 'package:madang/features/favorite/view/widget/favorite_done_widget.dart';
 import 'package:madang/features/favorite/view/widget/initial_widget.dart';
+import 'package:madang/widgets/loading/loading_widget.dart';
 import '../../../constant/app_text.dart';
 
 class FavoritePage extends StatefulWidget {
@@ -40,12 +41,11 @@ class _FavoritePageState extends State<FavoritePage> {
     return BlocBuilder<FavoriteBloc, FavoriteState>(
       builder: (context, state) {
         final data = state.data;
-
-        if (state.status == FavoriteStatusState.loading) {
-          return const Center(child: CircularProgressIndicator());
+        if (state.status == FavoriteStatusState.initial) {
+          return const FavoriteInitialWidget();
         }
-        if (state.status == FavoriteStatusState.noData) {
-          return Center(child: Text(state.message));
+        if (state.status == FavoriteStatusState.loading) {
+          return const LoadingWidget();
         }
         if (state.status == FavoriteStatusState.error) {
           return Center(child: Text(state.message));
@@ -53,7 +53,7 @@ class _FavoritePageState extends State<FavoritePage> {
         if (state.status == FavoriteStatusState.hasData) {
           return FavoriteDoneWidget(data: data);
         }
-        return const FavoriteInitialWidget();
+        return const SizedBox();
       },
     );
   }

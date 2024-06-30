@@ -22,6 +22,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(state.copyWith(status: HomeStatusState.loading));
     try {
       final data = await _repository.getAllRestaurant();
+      await Future.delayed(const Duration(seconds: 2));
       if (data!.isEmpty) {
         emit(state.copyWith(
           status: HomeStatusState.noData,
